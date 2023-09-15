@@ -1,0 +1,209 @@
+[
+    {
+        "id": "2b2931846fe35a82",
+        "type": "ncd-gateway-node",
+        "z": "d8c4cc4908f9d73e",
+        "name": "",
+        "connection": "fb1c05801bea5c04",
+        "unknown_devices": true,
+        "outputs": 2,
+        "x": 810,
+        "y": 360,
+        "wires": [
+            [
+                "3a0c4f7807776473"
+            ],
+            [
+                "06b07887964fae8a"
+            ]
+        ]
+    },
+    {
+        "id": "3a0c4f7807776473",
+        "type": "debug",
+        "z": "d8c4cc4908f9d73e",
+        "name": "debug 42",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "55377424779ca878",
+        "type": "inject",
+        "z": "d8c4cc4908f9d73e",
+        "name": "Clear Stored Calibration",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "10",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 260,
+        "y": 240,
+        "wires": [
+            [
+                "be9123574aab33b7"
+            ]
+        ]
+    },
+    {
+        "id": "be9123574aab33b7",
+        "type": "function",
+        "z": "d8c4cc4908f9d73e",
+        "name": "",
+        "func": "msg.payload = {};\nmsg.payload.address = \"00:00:00:00:00:00:FF:FF\";\nmsg.payload.data = [0xF4, 0x58, 0x00, 0x00, 0x41, 0x01];\nflow.set(\"request_type\",\"start_process\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 240,
+        "wires": [
+            [
+                "2b2931846fe35a82"
+            ]
+        ]
+    },
+    {
+        "id": "da36ccbdd2bbaf7c",
+        "type": "inject",
+        "z": "d8c4cc4908f9d73e",
+        "name": "DO Atmospheric point Calibration Command",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "15",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 320,
+        "wires": [
+            [
+                "e670209cabc2319d"
+            ]
+        ]
+    },
+    {
+        "id": "d2a867128a61a0b9",
+        "type": "inject",
+        "z": "d8c4cc4908f9d73e",
+        "name": "DO Zero Point Calibration Command",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "15",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 420,
+        "wires": [
+            [
+                "ebe9eaeeaaa8b5d5"
+            ]
+        ]
+    },
+    {
+        "id": "e670209cabc2319d",
+        "type": "function",
+        "z": "d8c4cc4908f9d73e",
+        "name": "",
+        "func": "msg.payload = {};\nmsg.payload.address = \"00:00:00:00:00:00:FF:FF\";\nmsg.payload.data = [0xF4, 0x58, 0x00, 0x00, 0x41, 0x02];\nflow.set(\"request_type\",\"start_process\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 320,
+        "wires": [
+            [
+                "2b2931846fe35a82"
+            ]
+        ]
+    },
+    {
+        "id": "ebe9eaeeaaa8b5d5",
+        "type": "function",
+        "z": "d8c4cc4908f9d73e",
+        "name": "",
+        "func": "msg.payload = {};\nmsg.payload.address = \"00:00:00:00:00:00:FF:FF\";\nmsg.payload.data = [0xF4, 0x58, 0x00, 0x00, 0x41, 0x03];\nflow.set(\"request_type\",\"start_process\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 420,
+        "wires": [
+            [
+                "2b2931846fe35a82"
+            ]
+        ]
+    },
+    {
+        "id": "06b07887964fae8a",
+        "type": "debug",
+        "z": "d8c4cc4908f9d73e",
+        "name": "debug 47",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "fb1c05801bea5c04",
+        "type": "ncd-gateway-config",
+        "name": "",
+        "comm_type": "serial",
+        "ip_address": "",
+        "tcp_port": "2101",
+        "port": "COM20",
+        "baudRate": "115200",
+        "pan_id": "7FFF",
+        "rssi": true
+    }
+]
